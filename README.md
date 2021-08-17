@@ -1,24 +1,85 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# テーブル設計
 
-Things you may want to cover:
+## users テーブル
 
-* Ruby version
+| Column                      | Type   | Options     |
+| --------------------------- | ------ | ----------- |
+| nickname                    | string | null: false |
+| email                       | string | null: false |
+| password                    | string | null: false |
+| confirm_password            | string | null: false |
+| last_name                   | string | null: false |
+| first_name                  | string | null: false |
+| last_name_kana              | string | null: false |
+| first_name_kana             | string | null: false |
+| birthday                    | date   | null: false |
 
-* System dependencies
 
-* Configuration
+### Association
 
-* Database creation
+- has_many :items
+- has_many :comments
+- has_many :buyers
 
-* Database initialization
+## items テーブル
 
-* How to run the test suite
+| Column                       | Type       | Options                        |
+| ---------------------------- | ---------- | ------------------------------ |
+| title                        | string     |                                |
+| price                        | integer    |                                |
+| product_condition            | text       |                                |
+| postage                      | text       |                                |
+| delivery_source              | text       |                                |
+| delivery_date                | text       |                                |
+| user                         | references | null: false, foreign_key: ture |
 
-* Services (job queues, cache servers, search engines, etc.)
+### Association
 
-* Deployment instructions
+- has_many :comments
+- has_many :buyers
+- belongs_to :users
 
-* ...
+## comments テーブル
+
+| Column                  | Type       | Options                        |
+| ----------------------- | ---------- | ------------------------------ |
+| text                    | text       |                                |
+| user                    | references | null: false, foreign_key: ture |
+| item                    | references | null: false, foreign_key: ture |
+
+### Association
+
+- belongs_to :comments
+- belongs_to :users
+
+
+## buyers テーブル
+
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| credit             | string     |                                |
+| user               | references | null: false, foreign_key: ture |
+| item               | references | null: false, foreign_key: ture |
+| address            | references | null: false, foreign_key: ture |
+
+### Association
+
+- has_many :buyers
+- has_many :comments
+- has_many :addresses
+
+## addresses テーブル
+
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| postcode           | string     |                                |
+| prefecture_id      | string     |                                |
+| city               | string     |                                |
+| block              | string     |                                |
+| building           | string     |                                |
+| phone_number       | integer    |                                |
+
+### Association
+
+- has_many :buyers
