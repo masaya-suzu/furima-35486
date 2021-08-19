@@ -33,12 +33,12 @@
 | prefecture_id                   | integer    |                                |
 | delivery_date_id                | integer    |                                |
 | category_id                     | integer    |                                |
+| item_info                       | integer    |                                |
 | user                            | references | null: false, foreign_key: ture |
 
 ### Association
 
 - has_many :comments
-- has_one :buyers
 - belongs_to :users
 
 ## comments テーブル
@@ -65,10 +65,10 @@
 
 ### Association
 
-- has_one :users
-- has_many :items
+- belongs_to :users
+- belongs_to :items
 - has_many :comments
-- has_one :addresses
+- has_one :address
 
 ## addresses テーブル
 
