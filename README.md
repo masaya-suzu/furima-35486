@@ -51,7 +51,7 @@
 
 ### Association
 
-- belongs_to :comments
+- belongs_to :items
 - belongs_to :users
 
 
